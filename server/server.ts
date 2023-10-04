@@ -3,7 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import homeRouter from './routes/home';
-
+import userRouter from './routes/user';
+import authRouter from './routes/auth';
+import profileRouter from './routes/profile';
 
 dotenv.config();
 
@@ -30,6 +32,9 @@ app.use(
 );
 
 app.use('/', homeRouter);
+app.use('/api/users', userRouter);
+app.use('/auth', authRouter);
+app.use('/user', profileRouter);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
   res.status(500).send({ message: err.message });
