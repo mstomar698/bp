@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import axios from 'axios';
 import { Store } from '../store';
+import { Link } from 'react-router-dom';
 
 interface State {
   loadingUpdate: boolean;
@@ -48,7 +49,8 @@ const ProfileScreen = () => {
       dispatch({ type: 'UPDATE_REQUEST' });
       console.log(loadingUpdate);
       const { data } = await axios.put(
-        'https://descriptive-bubble-production.up.railway.app/user/profile',
+        'http://localhost:5000/user/profile',
+        // 'https://descriptive-bubble-production.up.railway.app/user/profile',
         {
           name,
           email,
@@ -75,7 +77,8 @@ const ProfileScreen = () => {
   };
 
   return (
-    <div className="h-screen p-4 md:p-16 bg-gray-200">
+    <div className="h-screen p-4 md:p-16 bg-black text-green-300">
+      <Link to={'/'} className='flex flex-row justify-center items-center text-3xl mb-2'>BookPedia</Link>
       <div className="mx-auto max-w-md border shadow-2xl p-8 rounded-lg">
         <h1 className="my-3 text-3xl font-bold text-center">User Profile</h1>
         <form onSubmit={submitHandler} className="space-y-3">
@@ -85,7 +88,7 @@ const ProfileScreen = () => {
             </label>
             <input
               title="name"
-              className="border border-gray-300 p-2 rounded"
+              className="border border-green-300 p-2 rounded"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -97,7 +100,7 @@ const ProfileScreen = () => {
             </label>
             <input
               title="email"
-              className="border border-gray-300 p-2 rounded"
+              className="border border-green-300 p-2 rounded"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -110,7 +113,7 @@ const ProfileScreen = () => {
             </label>
             <input
               title="password"
-              className="border border-gray-300 p-2 rounded"
+              className="border border-green-300 p-2 rounded"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -121,7 +124,7 @@ const ProfileScreen = () => {
             </label>
             <input
               title="confirmPassword"
-              className="border border-gray-300 p-2 rounded"
+              className="border border-green-300 p-2 rounded"
               type="password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -135,6 +138,10 @@ const ProfileScreen = () => {
             </button>
           </div>
         </form>
+        <h1 className="my-2 tetx-3xl font-bold  text-center">Add Books</h1>
+        <Link to="/addBook" className="p-3 border border-green-300 rounded flex flex-col justify-center items-center ">
+          Add Book
+        </Link>
       </div>
     </div>
   );
