@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../store';
@@ -77,7 +77,8 @@ export default function UserListScreen(): JSX.Element {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get<User[]>(
-          `https://descriptive-bubble-production.up.railway.app/api/users`,
+          `http://localhost:5000/api/users`,
+          // `https://descriptive-bubble-production.up.railway.app/api/users`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -102,7 +103,8 @@ export default function UserListScreen(): JSX.Element {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
         await axios.delete(
-          `https://descriptive-bubble-production.up.railway.app/api/users/${user._id}`,
+          `http://localhost:5000/api/users/${user._id}`,
+          // `https://descriptive-bubble-production.up.railway.app/api/users/${user._id}`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -119,7 +121,8 @@ export default function UserListScreen(): JSX.Element {
   };
 
   return (
-    <div className="h-screen p-8 bg-gray-200">
+    <div className="h-screen p-8 bg-black text-green-300">
+      <Link to={'/'} className='flex flex-row justify-center items-center text-3xl'>BookPedia</Link>
       <div className="p-4 h-[550px] w-screen-min overflow-auto">
         <h1 className="text-2xl font-bold mb-4">Users</h1>
         {loadingDelete && <p className="text-center">Deleting...</p>}
@@ -130,7 +133,7 @@ export default function UserListScreen(): JSX.Element {
         ) : (
           <table className="table-auto w-full text-center border shadow-2xl rounded-lg">
             <thead>
-              <tr className="bg-gray-200 text-gray-700 border shadow-lg">
+              <tr className="bg-black text-green-300 border shadow-lg">
                 <th className="p-2 text-center">ID</th>
                 <th className="p-2 text-center">NAME</th>
                 <th className="p-2 text-center">EMAIL</th>
@@ -140,20 +143,20 @@ export default function UserListScreen(): JSX.Element {
             </thead>
             <tbody>
               {users.map((user: User) => (
-                <tr key={user._id} className="border-b border-gray-200">
+                <tr key={user._id} className="border-b border-green-500">
                   <td className="p-2">{user._id}</td>
                   <td className="p-2">{user.name}</td>
                   <td className="p-2">{user.email}</td>
                   <td className="p-2">{user.isAdmin ? 'YES' : 'NO'}</td>
                   <td className="p-2">
                     <button
-                      className="bg-gray-300 hover:bg-gray-400 px-2 py-1 rounded m-1"
+                      className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded m-1"
                       onClick={() => navigate(`/admin/user/${user._id}`)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-300 hover:bg-red-400 px-2 py-1 rounded m-1"
+                      className="bg-red-500 hover:bg-red-700 px-2 py-1 rounded m-1"
                       onClick={() => deleteHandler(user)}
                     >
                       Delete

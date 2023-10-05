@@ -12,6 +12,7 @@ import {
 import { CategoryScale } from 'chart.js';
 import { getError } from '../utils';
 import { Store } from '../store';
+import { Link } from 'react-router-dom';
 
 ChartJS.register(BarElement, LinearScale);
 ChartJS.register(CategoryScale);
@@ -28,7 +29,8 @@ const DashboardScreen: React.FC = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          'https://descriptive-bubble-production.up.railway.app/api/users',
+          'http://localhost:5000/api/users',
+          // 'https://descriptive-bubble-production.up.railway.app/api/users',
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -79,9 +81,9 @@ const DashboardScreen: React.FC = () => {
       {
         label: 'Number of Users',
         data: usersData,
-        backgroundColor: 'rgba(145, 235, 54, 0.2)',
-        borderColor: '#29501d',
-        textColor: '#29501d',
+        backgroundColor: 'rgba(155, 179, 132, 0.2)',
+        borderColor: '#74866e',
+        textColor: '#4c5748',
         borderWidth: 1,
       },
     ],
@@ -100,13 +102,11 @@ const DashboardScreen: React.FC = () => {
 
   const sum = usersData.reduce((acc, curr) => acc + curr, 0);
   return (
-    <div className="container mx-auto px-2 md:px-4 py-4 md:py-6">
-      <h1 className="text-2xl max-sm:text-lg font-bold mb-2 md:mb-4">
-        Admin Dashboard
-      </h1>
+    <div className="container mx-auto px-2 md:px-4 py-4 md:py-6 bg-black text-green-300">
+      <Link to={'/'} className='flex flex-row justify-center items-center text-3xl'>BookPedia</Link>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6">
         <h2 className="text-lg max-sm:text-base font-bold mb-2">
-          Total Users: {sum}
+          DashBoard <span className='px-2'></span>Total Users: {sum}
         </h2>
         <div className="flex items-center">
           <FaUser className="mr-2" />
@@ -116,16 +116,16 @@ const DashboardScreen: React.FC = () => {
         </div>
       </div>
       {loading ? (
-        <div className="h-screen p-8 bg-gray-50 flex items-center justify-center">
+        <div className="h-screen p-8 bg-black text-green-300 flex items-center justify-center">
           Loading...
         </div>
       ) : error ? (
-        <div className="h-screen p-8 bg-gray-50 flex items-center justify-center text-red-600">
+        <div className="h-screen p-8 bg-black text-green-300 flex items-center justify-center">
           {error}
         </div>
       ) : (
-        <div className="h-full">
-          <div className="border-2 border-gray-800 rounded-lg p-4 text-red-500 h-full">
+        <div className="max-h-screen">
+          <div className="border-2 border-green-300 rounded-lg p-4 bg-black text-green-300 h-full">
             <Bar
               data={data}
               options={options}

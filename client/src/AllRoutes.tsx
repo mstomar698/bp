@@ -8,6 +8,7 @@ import UserListScreen from './screens/userListScreen';
 import DashboardScreen from './screens/dashboardScreen';
 import ProtectedRoute from './components/protectedRoute';
 import ProfileScreen from './screens/profileScreen';
+import AddBookScreen from './screens/AddBookScreen';
 
 const AllRoutes = () => {
   return (
@@ -19,6 +20,14 @@ const AllRoutes = () => {
         element={
           <ProtectedRoute>
             <ProfileScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/addBook"
+        element={
+          <ProtectedRoute>
+            <AddBookScreen />
           </ProtectedRoute>
         }
       />
