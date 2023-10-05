@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../store';
@@ -64,7 +64,8 @@ const UserEditScreen: React.FC = () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(
-          `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
+          `http://localhost:5000/api/users/${userId}`,
+          // `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -88,7 +89,8 @@ const UserEditScreen: React.FC = () => {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
+        `http://localhost:5000/api/users/${userId}`,
+        // `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {
           headers: { Authorization: `${userInfo!.token}` },
@@ -106,7 +108,8 @@ const UserEditScreen: React.FC = () => {
   };
 
   return (
-    <div className="h-screen p-16 bg-gray-200">
+    <div className="h-screen p-16 bg-black text-green-300">
+       <Link to={'/'} className='flex flex-row justify-center items-center text-3xl my-4'>BookPedia</Link>
       <div className="container mx-auto max-w-md border-2 shadow-2xl p-4 rounded-lg">
         <h1 className="text-2xl font-bold mb-4">Edit User {userId}</h1>
         {loading ? (
@@ -121,7 +124,7 @@ const UserEditScreen: React.FC = () => {
               </label>
               <input
                 title="name"
-                className="border border-gray-300 p-2 rounded"
+                className="border border-green-300 p-2 rounded text-black"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -133,7 +136,7 @@ const UserEditScreen: React.FC = () => {
               </label>
               <input
                 title="email"
-                className="border border-gray-300 p-2 rounded"
+                className="border border-green-300 p-2 rounded text-black"
                 value={email}
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}

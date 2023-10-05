@@ -46,3 +46,20 @@
     font-size: 2rem;
   }
 }
+
+::-webkit-scrollbar {
+  width: 4px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #448aff; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b3ccf6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #448aff;
+}

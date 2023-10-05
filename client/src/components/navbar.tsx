@@ -24,15 +24,15 @@ const Navbar = () => {
   };
   return (
     <div>
-      <header className="bg-gray-300">
+      <header className="bg-black/10 border border-green-300 focus:border-green-500 hover:border-green-500 rounded-b-lg">
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center">
             <Link
               to="/"
               className="text-black space-x-2 font-bold text-lg flex flex-row"
             >
-              <FaHome className="mt-1" />
-              <span className="mr-2">mstomar698</span>
+              <FaHome className="mt-1 text-green-300" />
+              <span className="mr-2 text-green-300">mstomar698</span>
             </Link>
           </div>
           <div>
@@ -41,7 +41,7 @@ const Navbar = () => {
               <>
                 <div className="lg:hidden md:hidden">
                   <div
-                    className="text-black focus:outline-none border rounded-lg p-1 shadow-lg bg-gray-500 px-2 flex flex-row"
+                    className="text-green-300 focus:outline-none border rounded-lg p-1 shadow-lg bg-gray-500 px-2 flex flex-row"
                     onClick={() => setMobileMenu(true)}
                   >
                     <HiMenu className="text-3xl" />
@@ -52,7 +52,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/signin"
-                  className="lg:hidden md:hidden text-black hover:underline"
+                  className="lg:hidden md:hidden text-green-300 hover:underline"
                 >
                   <button className="text-black focus:outline-none border rounded-lg p-1 shadow-lg bg-gray-500 px-2 flex flex-row">
                     <FaSignInAlt className="mt-1" />
@@ -62,7 +62,7 @@ const Navbar = () => {
               </>
             )}
             {mobileMenu && (
-              <div className="lg:hidden md:hidden h-screen w-full top-0 z-10 left-0 absolute bg-black text-white">
+              <div className="lg:hidden md:hidden h-screen w-full top-0 z-10 left-0 absolute bg-black text-green-300">
                 <div>
                   {userInfo ? (
                     <div className="h-full flex flex-col justify-center items-center text-center p-32">
@@ -80,7 +80,7 @@ const Navbar = () => {
                           <Link
                             to="/profile"
                             onClick={handleUserMenuClick}
-                            className="block px-4 py-2 hover:bg-indigo-500 hover:text-red-500"
+                            className="block px-4 py-2 hover:bg-green-300 hover:text-red-500"
                           >
                             Profile
                           </Link>
@@ -129,7 +129,7 @@ const Navbar = () => {
               {userInfo ? (
                 <div className="relative mx-1">
                   <button
-                    className="text-black focus:outline-none border rounded-lg p-1 shadow-lg bg-gray-500 px-2 flex flex-row"
+                    className="text-green-900 focus:outline-none border border-green-300 px-4 rounded-lg p-1 shadow-lg bg-white/90 flex flex-row"
                     onClick={handleUserMenuClick}
                   >
                     <span className="mr-2">{userInfo.name}</span>
@@ -137,13 +137,13 @@ const Navbar = () => {
                   </button>
                   {userMenu && (
                     <>
-                      <div className="absolute right-0 mt-2 w-48 bg-green-400 rounded-md shadow-green-700 shadow-xl z-10 p-2">
+                      <div className="absolute right-0 mt-2 w-48 bg-white/70 border-2 border-green-300 rounded-md shadow-green-700 shadow-xl z-10 p-2">
                         <ul className="text-center">
                           <li>
                             <Link
                               to="/profile"
                               onClick={handleUserMenuClick}
-                              className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-red-500"
+                              className="block px-4 py-2 text-green-800 hover:bg-green-300 hover:rounded-lg hover:text-red-500"
                             >
                               Profile
                             </Link>
@@ -155,7 +155,7 @@ const Navbar = () => {
                                   <Link
                                     to="/admin/users"
                                     onClick={handleUserMenuClick}
-                                    className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-red-500"
+                                    className="block px-4 py-2 text-green-800 hover:bg-green-300 hover:rounded-lg hover:text-red-500"
                                   >
                                     Users
                                   </Link>
@@ -164,7 +164,7 @@ const Navbar = () => {
                                   <Link
                                     to="/admin/dashboard"
                                     onClick={handleUserMenuClick}
-                                    className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-red-500"
+                                    className="block px-4 py-2 text-green-800 hover:bg-green-300 hover:rounded-lg hover:text-red-500"
                                   >
                                     Dashboard
                                   </Link>
@@ -175,36 +175,12 @@ const Navbar = () => {
                           <li>
                             <button
                               onClick={signoutHandler}
-                              className="w-full px-4 py-2 shadow-2xl shadow-green-900 text-gray-800 hover:bg-indigo-500 hover:text-red-500 text-center"
+                              className="w-full px-4 py-2 shadow-xl rounded border-red-500 border-1 shadow-green-900 text-green-900 hover:bg-green-300 hover:rounded-lg hover:border-2 hover:text-red-500 text-center"
                             >
                               Sign Out
                             </button>
                           </li>
                         </ul>
-                        {userInfo.isAdmin && (
-                          <>
-                            <ul>
-                              <li>
-                                <Link
-                                  to="/admin/dashboard"
-                                  onClick={handleUserMenuClick}
-                                  className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-red-500"
-                                >
-                                  Dashboard
-                                </Link>
-                              </li>
-                              <li>
-                                <Link
-                                  to="/admin/users"
-                                  onClick={handleUserMenuClick}
-                                  className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-red-500"
-                                >
-                                  Users
-                                </Link>
-                              </li>
-                            </ul>
-                          </>
-                        )}
                       </div>
                     </>
                   )}

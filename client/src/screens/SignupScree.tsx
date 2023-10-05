@@ -26,7 +26,8 @@ const SignupScreen = () => {
     }
     try {
       const { data } = await Axios.post(
-        'https://descriptive-bubble-production.up.railway.app/auth/signup',
+        'http://localhost:5000/auth/signup',
+        // 'https://descriptive-bubble-production.up.railway.app/auth/signup',
         {
           name,
           email,
