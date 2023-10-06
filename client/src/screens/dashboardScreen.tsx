@@ -29,8 +29,8 @@ const DashboardScreen: React.FC = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          'http://localhost:5000/api/users',
-          // 'https://descriptive-bubble-production.up.railway.app/api/users',
+          // 'http://localhost:5000/api/users',
+          'https://bp-production.up.railway.app/api/users',
           {
             headers: { Authorization: `${userInfo!.token}` },
           }

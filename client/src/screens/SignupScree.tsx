@@ -26,8 +26,8 @@ const SignupScreen = () => {
     }
     try {
       const { data } = await Axios.post(
-        'http://localhost:5000/auth/signup',
-        // 'https://descriptive-bubble-production.up.railway.app/auth/signup',
+        // 'http://localhost:5000/auth/signup',
+        'https://bp-production.up.railway.app/auth/signup',
         {
           name,
           email,
@@ -42,11 +42,11 @@ const SignupScreen = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       navigate(redirect);
-  //     }
-  //   }, [navigate, redirect, userInfo]);
+    useEffect(() => {
+      if (userInfo) {
+        navigate(redirect);
+      }
+    }, [navigate, redirect, userInfo]);
 
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">
