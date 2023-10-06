@@ -89,8 +89,8 @@ const UserEditScreen: React.FC = () => {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `http://localhost:5000/api/users/${userId}`,
-        // `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
+        // `http://localhost:5000/api/users/${userId}`,
+        `https://bp-production.up.railway.app/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {
           headers: { Authorization: `${userInfo!.token}` },

@@ -21,8 +21,8 @@ const SigninScreen = () => {
     e.preventDefault();
     try {
       const { data } = await Axios.post<{ email: string; password: string }>(
-        // 'https://descriptive-bubble-production.up.railway.app/auth//signin',
-        'http://localhost:5000/auth//signin',
+        'https://bp-production.up.railway.app/auth//signin',
+        // 'http://localhost:5000/auth//signin',
         { email, password }
       );
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
@@ -33,11 +33,11 @@ const SigninScreen = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       navigate(redirect);
-  //     }
-  //   }, [navigate, redirect, userInfo]);
+    useEffect(() => {
+      if (userInfo) {
+        navigate(redirect);
+      }
+    }, [navigate, redirect, userInfo]);
 
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">

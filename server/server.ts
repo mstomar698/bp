@@ -27,6 +27,10 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
+      'https://bp-mstomar698.vercel.app',
+      'https://vercel.com/mstomar698/bp/AGG3CnXaMaeCNzgTxjTuVjmsee8e',
+      'https://bp-five.vercel.app',
+      'https://bookpedia-mstomar.online',
     ],
     credentials: true,
   })
