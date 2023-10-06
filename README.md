@@ -8,7 +8,7 @@
 
 > - Search for books by title, author, genre, etc.
 > - Get details of books like author, genre, description, etc.
-> - Make collections of books you like.
+> - Apply easy filter for better sorting and pagination.
 > - Proper personal spaces for users.
 > - Easy to use and understand.
 > - Responsive and device friendly.
@@ -41,13 +41,29 @@ npm install
 # Start the client
 npm start
 ```
+##### Dummy creds
+```bash
+#admin
+email: admin@admin.com
+password: admin
+#user
+email: user@user.com
+password: password
+```
 
 ## Screenshots
 
 <!-- AUTH -->
+![Auth](/assets/auth.png)
 <!-- HOME  -->
+![Home](/assets/home.png)
 <!-- SEARCH -->
-<!-- COLLECTION -->
+![Search](/assets/search.png)
+<!-- Filter -->
+![Filter](/assets/filter.png)
+<!-- Pagination -->
+![Pagination](/assets/pagination.png)
 <!-- RESPONSIVE -->
+![Filter](/assets/responsive.png)
 
 ## MIT License
