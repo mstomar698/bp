@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://pms-api.suvidhaen.com/',
+  baseURL: 'https://bp-production.up.railway.app/',
 });
 
 
