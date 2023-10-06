@@ -6,11 +6,16 @@ import ReactPaginate from 'react-paginate';
 import BookCard from '../components/bookCard';
 import Footer from '../components/footer';
 import { FaFilter, FaSearch } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router';
 
 const HomeScreen = () => {
   const { state } = useContext(Store);
   const { userInfo, books } = state;
-
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+  // console.log(userInfo);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -65,6 +70,12 @@ const HomeScreen = () => {
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
+
   return (
     <div>
       <Navbar />
@@ -92,7 +103,7 @@ const HomeScreen = () => {
             </div>
           </div>
         </div>
-        <div className="min-h-screen w-full flex flex-grow justify-around max-sm:flex-col max-sm:items-center max-sm:space-y-4" onClick={() => setIsFilterVisible(false)}>
+        <div className="min-h-screen w-full flex flex-wrap justify-around max-sm:flex-col max-sm:items-center max-sm:space-y-4" onClick={() => setIsFilterVisible(false)}>
           {currentItems.map((book: any) => (
             <BookCard book={book} key={book._id} />
           ))}

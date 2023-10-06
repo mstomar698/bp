@@ -22,7 +22,7 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
-    <div className="border rounded-lg p-4 shadow-md max-w-[300px] h-min">
+    <div className="border rounded-lg p-4 shadow-md max-w-[300px] h-min m-4">
       <img
         src={book.coverImage}
         alt={book.name}

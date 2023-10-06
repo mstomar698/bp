@@ -41,12 +41,15 @@ const SigninScreen = () => {
 
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">
-      <div className="min-w-[50%]  min-h-[70%] mx-auto px-auto border-2 hover:border-4 hover:border-gray-700 rounded shadow-xl">
+      <div className="min-w-[50%]  min-h-[70%] mx-auto px-auto border-2 border-green-300 hover:border-2 hover:border-green-500 rounded shadow-xl p-16 max-sm:p-4 space-y-2">
+      <Link to={'/'} className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4">
+          BookPedia
+       </Link>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300 "
             >
               Email
             </label>
@@ -54,7 +57,7 @@ const SigninScreen = () => {
               type="email"
               id="email"
               placeholder="Enter email"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 rounded border-2 border-green-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -63,7 +66,7 @@ const SigninScreen = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300"
             >
               Password
             </label>
@@ -71,7 +74,7 @@ const SigninScreen = () => {
               type="password"
               id="password"
               placeholder="Enter password"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 border-green-300 rounded"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -86,7 +89,7 @@ const SigninScreen = () => {
           <div className="text-white text-center my-4">
             New customer?{' '}
             <Link to={`/signup?redirect=${redirect}`}>
-              <span className="text-blue-500 font-semibold">
+              <span className="text-green-300 font-semibold underline">
                 Create your account
               </span>
             </Link>

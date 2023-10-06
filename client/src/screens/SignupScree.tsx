@@ -51,11 +51,14 @@ const SignupScreen = () => {
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">
       <div className="min-w-[60%]  min-h-[70%] mx-auto p-6 md:p-12 border-2 hover:border-4 hover:border-gray-700 rounded shadow-xl">
+      <Link to={'/'} className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4">
+          BookPedia
+       </Link>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300"
             >
               Name
             </label>
@@ -63,7 +66,7 @@ const SignupScreen = () => {
               type="text"
               id="name"
               placeholder="Enter name"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 border-green-300 rounded"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -72,7 +75,7 @@ const SignupScreen = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300"
             >
               Email
             </label>
@@ -80,7 +83,7 @@ const SignupScreen = () => {
               type="email"
               id="email"
               placeholder="Enter email"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 border-green-300 rounded"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -89,7 +92,7 @@ const SignupScreen = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300"
             >
               Password
             </label>
@@ -97,7 +100,7 @@ const SignupScreen = () => {
               type="password"
               id="password"
               placeholder="Enter password"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 border-green-300 rounded"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -106,7 +109,7 @@ const SignupScreen = () => {
           <div className="mb-4">
             <label
               htmlFor="confirmPassword"
-              className="block mb-2 font-bold text-gray-700"
+              className="block mb-2 font-bold text-green-300"
             >
               Confirm Password
             </label>
@@ -114,7 +117,7 @@ const SignupScreen = () => {
               type="password"
               id="confirmPassword"
               placeholder="Confirm password"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 border-green-300 rounded"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -129,7 +132,7 @@ const SignupScreen = () => {
           <div className="text-white text-center my-4">
             Already have an account?{' '}
             <Link to={`/signin?redirect=${redirect}`}>
-              <span className="text-blue-500 font-semibold">Sign-In</span>
+              <span className="text-green-500 underline font-semibold">Sign-In</span>
             </Link>
           </div>
         </form>
