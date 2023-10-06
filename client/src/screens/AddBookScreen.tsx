@@ -8,13 +8,13 @@ const AddBookScreen = () => {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [formData, setFormData] = useState({
-    name: 'Other Book Title',
-    author: 'Mary Doe',
-    genre: 'History',
-    yearRelease: '2012',
-    price: '10.99',
-    description: 'This is a other sample book description.',
-    coverImage: 'https://placehold.co/600x400/png', // Replace with a real cover image URL
+    name: '',
+    author: '',
+    genre: '',
+    yearRelease: '',
+    price: '',
+    description: '',
+    coverImage: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,6 @@ const AddBookScreen = () => {
     e.preventDefault();
 
     try {
-      // Prepare the JSON data to send
       const requestData = {
         name: formData.name,
         author: formData.author,
@@ -51,22 +50,19 @@ const AddBookScreen = () => {
 
       if (response.status === 201) {
         const responseData = response.data;
-        console.log(responseData); // Handle the response data as needed
-        // Reset the form or redirect to another page upon success
+        console.log(responseData);
       } else {
         console.error('Failed to add book:', response.data.message);
-        // Handle the error appropriately
       }
     } catch (error) {
       console.error('An error occurred:', error);
-      // Handle the error appropriately
     }
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white/10 p-8 rounded-lg shadow-md w-full md:w-1/2 lg:w-1/3">
-        <Link to={'/'} className="text-center text-3xl underline text-white/50">
+        <Link to={'/'} className="text-center text-3xl underline text-white/50 flex lfex -row justify-center items-center mb-4">
           BookPedia
         </Link>
         <h2 className="text-2xl text-green-500 mb-4">
@@ -82,8 +78,11 @@ const AddBookScreen = () => {
               type="text"
               id="name"
               name="name"
+              placeholder="Book Name"
               value={formData.name}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Book Name')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />
@@ -96,8 +95,11 @@ const AddBookScreen = () => {
               type="text"
               id="author"
               name="author"
+              placeholder="Author"
               value={formData.author}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Author')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />
@@ -110,8 +112,11 @@ const AddBookScreen = () => {
               type="text"
               id="genre"
               name="genre"
+              placeholder="Genre"
               value={formData.genre}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Genre')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />
@@ -124,22 +129,28 @@ const AddBookScreen = () => {
               type="number"
               id="yearRelease"
               name="yearRelease"
+              placeholder="Year of Release"
               value={formData.yearRelease}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Year of Release')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />
           </div>
           <div className="mb-4">
             <label htmlFor="price" className="block text-green-500 mb-1">
-              Price
+              Price ($)
             </label>
             <input
               type="number"
               id="price"
               name="price"
+              placeholder="Price"
               value={formData.price}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Price')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />
@@ -151,8 +162,11 @@ const AddBookScreen = () => {
             <textarea
               id="description"
               name="description"
+              placeholder="Description"
               value={formData.description}
               onChange={() => handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Description')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             ></textarea>
@@ -165,8 +179,11 @@ const AddBookScreen = () => {
               type="text"
               id="coverImage"
               name="coverImage"
+              placeholder="Cover Image URL"
               value={formData.coverImage}
               onChange={handleChange}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) => (e.target.placeholder = 'Cover Image URL')}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-300"
               required
             />

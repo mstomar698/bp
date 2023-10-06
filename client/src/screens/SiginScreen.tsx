@@ -21,8 +21,8 @@ const SigninScreen = () => {
     e.preventDefault();
     try {
       const { data } = await Axios.post<{ email: string; password: string }>(
-        'https://bp-production.up.railway.app/auth//signin',
-        // 'http://localhost:5000/auth//signin',
+        'https://bp-production.up.railway.app/auth/signin',
+        // 'http://localhost:5000/auth/signin',
         { email, password }
       );
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });

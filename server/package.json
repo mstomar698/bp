@@ -10,15 +10,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/mstomar698/auth-ts.git"
+        "url": "git+https://github.com/mstomar698/bp.git"
     },
     "keywords": [],
     "author": "mstomar698",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/mstomar698/auth-ts.git/issues"
+        "url": "https://github.com/mstomar698/bp.git/issues"
     },
-    "homepage": "https://github.com/mstomar698/auth-ts.git#readme",
+    "homepage": "https://github.com/mstomar698/bp.git#readme",
     "dependencies": {
         "@types/express": "^4.17.17",
         "bcryptjs": "^2.4.3",
