@@ -59,8 +59,7 @@ export function StoreProvider(props: {
     if (state.userInfo) {
       const fetchBooks = async () => {
         try {
-          const response = await axios.get('https://bp-production.up.railway.app/api/books', {
-          // const response = await axios.get('http://localhost:5000/api/books', {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/books`, {
             headers: { Authorization: `${state?.userInfo?.token}` },
           });
 

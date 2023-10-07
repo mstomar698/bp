@@ -64,8 +64,7 @@ const UserEditScreen: React.FC = () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(
-          `http://localhost:5000/api/users/${userId}`,
-          // `https://descriptive-bubble-production.up.railway.app/api/users/${userId}`,
+          `${process.env.REACT_APP_BASE_URL}/api/users/${userId}`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -89,8 +88,7 @@ const UserEditScreen: React.FC = () => {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        // `http://localhost:5000/api/users/${userId}`,
-        `https://bp-production.up.railway.app/api/users/${userId}`,
+        `${process.env.REACT_APP_BASE_URL}/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {
           headers: { Authorization: `${userInfo!.token}` },

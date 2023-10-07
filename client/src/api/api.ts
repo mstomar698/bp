@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://bp-production.up.railway.app/',
+  baseURL: `${process.env.REACT_APP_BASE_URL}/`,
 });
 
 

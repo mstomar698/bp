@@ -29,8 +29,7 @@ const DashboardScreen: React.FC = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          // 'http://localhost:5000/api/users',
-          'https://bp-production.up.railway.app/api/users',
+          `${process.env.REACT_APP_BASE_URL}/api/users`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }

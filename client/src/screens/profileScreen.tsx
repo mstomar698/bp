@@ -49,8 +49,7 @@ const ProfileScreen = () => {
       dispatch({ type: 'UPDATE_REQUEST' });
       console.log(loadingUpdate);
       const { data } = await axios.put(
-        // 'http://localhost:5000/user/profile',
-        'https://bp-production.up.railway.app/user/profile',
+        `${process.env.REACT_APP_BASE_URL}/user/profile`,
         {
           name,
           email,

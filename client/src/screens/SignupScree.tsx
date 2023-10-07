@@ -26,8 +26,7 @@ const SignupScreen = () => {
     }
     try {
       const { data } = await Axios.post(
-        // 'http://localhost:5000/auth/signup',
-        'https://bp-production.up.railway.app/auth/signup',
+        `${process.env.REACT_APP_BASE_URL}/auth/signup`,
         {
           name,
           email,

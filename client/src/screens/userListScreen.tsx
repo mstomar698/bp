@@ -77,8 +77,7 @@ export default function UserListScreen(): JSX.Element {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get<User[]>(
-          `http://localhost:5000/api/users`,
-          // `https://descriptive-bubble-production.up.railway.app/api/users`,
+          `${process.env.REACT_APP_BASE_URL}/api/users`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
@@ -103,8 +102,7 @@ export default function UserListScreen(): JSX.Element {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
         await axios.delete(
-          // `http://localhost:5000/api/users/${user._id}`,
-          `https://bp-production.up.railway.app/api/users/${user._id}`,
+          `${process.env.REACT_APP_BASE_URL}/api/users/${user._id}`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
