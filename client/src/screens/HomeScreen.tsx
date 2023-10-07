@@ -7,6 +7,7 @@ import BookCard from '../components/bookCard';
 import Footer from '../components/footer';
 import { FaFilter, FaSearch } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const HomeScreen = () => {
   const { state } = useContext(Store);
@@ -77,57 +78,59 @@ const HomeScreen = () => {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div>
-      <Navbar />
-      <div className="text-green-300 min-h-screen flex flex-grow flex-col justify-start items-start">
-        <div className="w-full my-2 mb-4 items-center justify-center flex flex-grow">
-          <div className="relative min-w-[70%]">
-            <input
-              type="text"
-              placeholder="Search books..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              onClick={() => setIsFilterVisible(false)}
-              className="w-full pl-12 pr-4 py-2 border-2 rounded-lg focus:outline-none focus:border-green-500 text-green-900"
+    <div className="text-green-300 min-h-screen flex flex-grow flex-col justify-start items-start">
+      <div className="w-full my-2 mb-4 items-center justify-center flex flex-grow">
+        <div className="relative min-w-[70%]">
+          <input
+            type="text"
+            placeholder="Search books..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onClick={() => setIsFilterVisible(false)}
+            className="w-full pl-12 pr-4 py-2 border-2 rounded-lg focus:outline-none focus:border-green-500 text-green-900"
+          />
+          <div className="absolute top-0 left-0 pl-3 pt-2">
+            <FaSearch className="mt-1 text-xl" />
+          </div>
+          <div className="absolute top-0 right-0 pr-3 pt-2">
+            <FaFilter
+              className={`mt-1 text-xl cursor-pointer ${
+                isFilterVisible ? 'text-green-500' : ''
+              }`}
+              onClick={toggleFilterDropdown}
             />
-            <div className="absolute top-0 left-0 pl-3 pt-2">
-              <FaSearch className="mt-1 text-xl" />
-            </div>
-            <div className="absolute top-0 right-0 pr-3 pt-2">
-              <FaFilter
-                className={`mt-1 text-xl cursor-pointer ${
-                  isFilterVisible ? 'text-green-500' : ''
-                }`}
-                onClick={toggleFilterDropdown}
-              />
-            </div>
           </div>
         </div>
-        <div className="min-h-screen w-full flex flex-wrap justify-around max-sm:flex-col max-sm:items-center max-sm:space-y-4" onClick={() => setIsFilterVisible(false)}>
-          {currentItems.map((book: any) => (
-            <BookCard book={book} key={book._id} />
-          ))}
-        </div>
-
-        <ReactPaginate
-          previousLabel={'previous'}
-          nextLabel={'next'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={Math.ceil(books.length / itemsPerPage)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageClick}
-          containerClassName={'flex justify-around w-full py-4 items-center'}
-          activeClassName={'active'}
-          activeLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
-          nextLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
-          previousLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
-          disabledClassName={
-            'bg-green-300 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed'
-          }
-        />
       </div>
+      <div
+        className="min-h-screen w-full flex flex-wrap justify-around max-sm:flex-col max-sm:items-center max-sm:space-y-4"
+        onClick={() => setIsFilterVisible(false)}
+      >
+        {currentItems.map((book: any) => (
+          <Link to={`/book/${book._id}`} key={book._id}>
+            <BookCard book={book} />
+          </Link>
+        ))}
+      </div>
+
+      <ReactPaginate
+        previousLabel={'previous'}
+        nextLabel={'next'}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={Math.ceil(books.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={'flex justify-around w-full py-4 items-center'}
+        activeClassName={'active'}
+        activeLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
+        nextLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
+        previousLinkClassName={'bg-green-300 text-white px-4 py-2 rounded'}
+        disabledClassName={
+          'bg-green-300 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed'
+        }
+      />
       {isFilterVisible && (
         <div className="absolute top-[70px] max-sm:top-[76px] right-[240px] max-sm:right-[60px] mt-12 bg-white border border-green-300 rounded-lg shadow-md p-4 ">
           <label className="block text-green-700 mb-2">Genre:</label>
@@ -156,7 +159,6 @@ const HomeScreen = () => {
           />
         </div>
       )}
-      <Footer />
     </div>
   );
 };

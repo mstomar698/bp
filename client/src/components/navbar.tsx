@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
 import { Store } from '../store';
 import { Link } from 'react-router-dom';
-import { FaHome, FaSignInAlt } from 'react-icons/fa';
+import { FaBook, FaHome, FaSignInAlt } from 'react-icons/fa';
+import { GiBookshelf } from 'react-icons/gi';
 import { HiDotsVertical, HiMenu } from 'react-icons/hi';
 import { RxCross1 } from 'react-icons/rx';
 
@@ -31,8 +32,8 @@ const Navbar = () => {
               to="/"
               className="text-black space-x-2 font-bold text-lg flex flex-row"
             >
-              <FaHome className="mt-1 text-green-300" />
-              <span className="mr-2 text-green-300">mstomar698</span>
+              <FaBook className="mt-1 text-green-300" />
+              <span className="mr-2 text-green-300">BookPedia</span>
             </Link>
           </div>
           <div>
@@ -85,6 +86,15 @@ const Navbar = () => {
                             Profile
                           </Link>
                         </div>
+                        <div className="text-white/80 w-full flex justify-center items-center shadow-2xl">
+                          <Link
+                            to="/collection"
+                            onClick={handleUserMenuClick}
+                            className="block px-4 py-2 hover:bg-green-300 hover:text-red-500"
+                          >
+                            Collection
+                          </Link>
+                        </div>
                         {userInfo.isAdmin && (
                           <div className="">
                             <div className="w-full flex  justify-center items-center shadow-2xl">
@@ -127,7 +137,15 @@ const Navbar = () => {
             {/* for lg-Device */}
             <nav className="max-sm:hidden flex items-center justify-end">
               {userInfo ? (
-                <div className="relative mx-1">
+                <div className="relative mx-1 flex flex-row gap-8 text-xl">
+                  <button
+                    title="collection"
+                    className="rounded-full p-2 border border-gray-700"
+                  >
+                    <Link to="/collection">
+                      <GiBookshelf className="text-green-300 font-extrabold text-2xl" />
+                    </Link>
+                  </button>
                   <button
                     className="text-green-900 focus:outline-none border border-green-300 px-4 rounded-lg p-1 shadow-lg bg-white/90 flex flex-row"
                     onClick={handleUserMenuClick}
@@ -186,6 +204,7 @@ const Navbar = () => {
                   )}
                 </div>
               ) : (
+                // Lg-Unauthorixed navbar
                 <Link to="/signin" className="text-black hover:underline">
                   <button className="text-black focus:outline-none border rounded-lg p-1 shadow-lg bg-gray-500 px-2 flex flex-row">
                     <FaSignInAlt className="mt-1" />

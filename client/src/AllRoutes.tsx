@@ -9,6 +9,10 @@ import DashboardScreen from './screens/dashboardScreen';
 import ProtectedRoute from './components/protectedRoute';
 import ProfileScreen from './screens/profileScreen';
 import AddBookScreen from './screens/AddBookScreen';
+import BookCardScreen from './screens/BookCardScreen';
+import ReadBook from './screens/ReadBook';
+import CheckOut from './screens/CheckOut';
+import CollectionScreen from './screens/CollectionScreen';
 
 const AllRoutes = () => {
   return (
@@ -28,6 +32,38 @@ const AllRoutes = () => {
         element={
           <ProtectedRoute>
             <AddBookScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/collection"
+        element={
+          <ProtectedRoute>
+            <CollectionScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/book/:id"
+        element={
+          <ProtectedRoute>
+            <BookCardScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/buybook/:id"
+        element={
+          <ProtectedRoute>
+            <CheckOut />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/readbook/:id"
+        element={
+          <ProtectedRoute>
+            <ReadBook />
           </ProtectedRoute>
         }
       />
