@@ -11,18 +11,23 @@ const Navbar = () => {
   const [userMenu, setUserMenu] = useState(false);
 
   const [mobileMenu, setMobileMenu] = useState(false);
-  const { userInfo } = state;
+  const { userInfo, collections } = state;
   const handleUserMenuClick = () => {
     setUserMenu((prevState) => !prevState);
     setMobileMenu(false);
   };
-
   const signoutHandler = () => {
+    let new_user = localStorage.removeItem('userInfo');
+    localStorage.removeItem('collections');
+    localStorage.removeItem(`collections_${state.userInfo?.email}`);
+    let new_collection = localStorage.removeItem(`collection_${userInfo?.email}`);
+    console.log(new_collection, new_user);
+    localStorage.removeItem('books');
     ctxDispatch({ type: 'USER_SIGNOUT' });
-    localStorage.removeItem('userInfo');
     window.location.href = '/signin';
     handleUserMenuClick();
   };
+  const userEmail: any = userInfo?.email
   return (
     <div>
       <header className="bg-black/10 border border-green-300 focus:border-green-500 hover:border-green-500 rounded-b-lg">
@@ -63,7 +68,7 @@ const Navbar = () => {
               </>
             )}
             {mobileMenu && (
-              <div className="lg:hidden md:hidden h-screen w-full top-0 z-10 left-0 absolute bg-black text-green-300">
+              <div className="lg:hidden md:hidden h-screen w-full top-0 z-40 left-0 absolute bg-black text-green-300">
                 <div>
                   {userInfo ? (
                     <div className="h-full flex flex-col justify-center items-center text-center p-32">
@@ -86,13 +91,13 @@ const Navbar = () => {
                             Profile
                           </Link>
                         </div>
-                        <div className="text-white/80 w-full flex justify-center items-center shadow-2xl">
+                        <div className="text-white/80 w-full flex flex-row justify-center items-center shadow-2xl">
                           <Link
                             to="/collection"
                             onClick={handleUserMenuClick}
                             className="block px-4 py-2 hover:bg-green-300 hover:text-red-500"
                           >
-                            Collection
+                            <span className='text-red-500 rounded-full p-1 text-xs border-2 border-red-400 px-2 mr-2 mb-1'>{collections[userEmail].length}</span>Collections
                           </Link>
                         </div>
                         {userInfo.isAdmin && (
@@ -140,10 +145,10 @@ const Navbar = () => {
                 <div className="relative mx-1 flex flex-row gap-8 text-xl">
                   <button
                     title="collection"
-                    className="rounded-full p-2 border border-gray-700"
+                    className="rounded-full p-2 border border-gray-700 flex flex-row"
                   >
-                    <Link to="/collection">
-                      <GiBookshelf className="text-green-300 font-extrabold text-2xl" />
+                    <Link to="/collection" className=''>
+                    <span className='text-red-500 rounded-full p-1 text-md font-bold absolute top-0 mb-2 ml-2'>{collections[userEmail].length}</span><GiBookshelf className="text-green-300 font-extrabold text-2xl" />
                     </Link>
                   </button>
                   <button
@@ -155,7 +160,7 @@ const Navbar = () => {
                   </button>
                   {userMenu && (
                     <>
-                      <div className="absolute right-0 mt-2 w-48 bg-white/70 border-2 border-green-300 rounded-md shadow-green-700 shadow-xl z-10 p-2">
+                      <div className="absolute right-0 mt-12 w-48 bg-white/70 border-2 border-green-300 rounded-md shadow-green-700 shadow-xl z-10 p-2">
                         <ul className="text-center">
                           <li>
                             <Link

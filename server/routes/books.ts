@@ -92,13 +92,10 @@ bookRouter.patch('/edit/:id', isAuth, async (req: Request, res: Response) => {
 
 bookRouter.get('/:id', isAuth, async (req: Request, res: Response) => {
   const bookId = req.params.id;
-  console.log(`Fetching book with ID: ${bookId}`);
   const book = await Book.findById(bookId);
   if (book) {
-    console.log(`Found book: ${book}`);
     res.send(book);
   } else {
-    console.log(`Book Not Found with ID: ${bookId}`);
     res.status(404).send({ message: 'Book Not Found' });
   }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShoppingCart, FaBookOpen, FaHeart } from 'react-icons/fa';
+import { FaShoppingCart, FaBookOpen } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 interface Book {
@@ -44,9 +44,6 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
       <div className="text-xl text-right flex flex-row justify-between px-2">
         <span className="flex flex-row flex-grow max-w-[20%] justify-between mt-0.5">
           {book.reads}{' '}
-          <Link to={'/'} className="mt-1.5">
-            <FaHeart className="" />
-          </Link>{' '}
         </span>
         $ {book.price}*
       </div>
