@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getError } from '../utils';
 import { Store } from '../store';
 // import {
@@ -9,6 +9,7 @@ import { Store } from '../store';
 //   BsFillPlayCircleFill,
 // } from 'react-icons/bs';
 import { FcReading, FcReadingEbook } from 'react-icons/fc';
+import { RxCross2 } from 'react-icons/rx';
 
 type Book = {
   name: string;
@@ -54,8 +55,9 @@ const reducer = (
   }
 };
 
+// We are using separate reducers to fetch book from its ID that we get from PARAMS
 const BookCardScreen: React.FC = () => {
-  const [{ error, book }, dispatch] = useReducer(reducer, {
+  const [{ error, book }, dispatchBook] = useReducer(reducer, {
     loading: true,
     error: '',
     loadingUpdate: false,
@@ -63,26 +65,120 @@ const BookCardScreen: React.FC = () => {
     scrolled: false,
   });
 
-  const { state } = useContext(Store);
-  const { userInfo } = state;
+  // We have to use original store dispatch to update the collections if we add book from book card screen
+  const { state, dispatch, fetchCollectionsOnAdd } = useContext(Store);
+  const { userInfo, collections } = state;
+  const [
+    deleteBookFromCollectionConfirmatonModal,
+    setDeleteBookFromCollectionConfirmatonModal,
+  ] = useState(false);
+  const [bookInCollection, setBookInCollection] = useState<{
+    [bookId: string]: boolean;
+  }>({});
 
   const params = useParams<{ id: string }>();
   const { id: bookId } = params;
+  const navigate = useNavigate();
+
+  const handleBookDeletionFormCollections = async (bookId: string) => {
+    const payload = {
+      email: userInfo?.email,
+      bookId: bookId,
+    };
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/collections/delete/book_from_collection`,
+        payload,
+        {
+          headers: { Authorization: `${userInfo!.token}` },
+        }
+      );
+      if (response.status === 200) {
+        const collectionString = localStorage.getItem(
+          `collection_${userInfo?.email}`
+        );
+        let collection = collectionString ? JSON.parse(collectionString) : [];
+
+        collection = collection.filter((id: string) => id !== bookId);
+
+        localStorage.setItem(
+          `collection_${userInfo?.email}`,
+          JSON.stringify(collection)
+        );
+        setBookInCollection((prevState) => ({
+          ...prevState,
+          [bookId]: true,
+        }));
+        fetchCollectionsOnAdd();
+        setDeleteBookFromCollectionConfirmatonModal(false);
+        window.location.reload();
+      }
+    } catch (error: any) {
+      console.error('Error deleting book:', error);
+    }
+  };
+  const handleAddToCollections = async (bookId: string) => {
+    const BookExistInCollection =
+      userInfo?.email &&
+      userInfo.email in collections &&
+      collections[userInfo.email].includes(bookId);
+    if (BookExistInCollection) {
+      setDeleteBookFromCollectionConfirmatonModal(true);
+      return;
+    }
+    const payload = {
+      email: userInfo?.email,
+      bookId: bookId,
+    };
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/collections/add_to_collection`,
+        payload,
+        {
+          headers: { Authorization: `${userInfo!.token}` },
+        }
+      );
+      if (response.status === 200) {
+        const collectionString = localStorage.getItem(
+          `collection_${userInfo?.email}`
+        );
+        let collection = collectionString ? JSON.parse(collectionString) : [];
+        if (!collection.includes(bookId)) {
+          collection.push(bookId);
+          localStorage.setItem(
+            `collection_${userInfo?.email}`,
+            JSON.stringify(collection)
+          );
+          dispatch({ type: 'ADD_BOOK_TO_COLLECTION', payload: bookId });
+          setBookInCollection((prevState) => ({
+            ...prevState,
+            [bookId]: true,
+          }));
+          fetchCollectionsOnAdd();
+        }
+      }
+    } catch (error: any) {
+      console.error('Error Adding book to collections:', error);
+      dispatch({
+        type: 'ERROR_ADD_BOOK_TO_COLLECTION',
+        payload: error.message,
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch({ type: 'FETCH_REQUEST' });
+        dispatchBook({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/books/${bookId}`,
           {
             headers: { Authorization: `${userInfo!.token}` },
           }
         );
-        console.log(data);
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        dispatchBook({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err: any) {
-        dispatch({
+        dispatchBook({
           type: 'FETCH_FAIL',
           payload: getError(err),
         });
@@ -90,6 +186,18 @@ const BookCardScreen: React.FC = () => {
     };
     fetchData();
   }, [bookId, userInfo]);
+
+  useEffect(() => {
+    if (userInfo) {
+      fetchCollectionsOnAdd();
+
+      const booksInCollection: { [bookId: string]: boolean } = {};
+      collections[userInfo.email]?.forEach((bookId: string) => {
+        booksInCollection[bookId] = true;
+      });
+      setBookInCollection(booksInCollection);
+    }
+  }, [userInfo, collections, fetchCollectionsOnAdd]);
 
   return (
     <div className="bg-black text-green-300 min-h-screen">
@@ -207,14 +315,42 @@ const BookCardScreen: React.FC = () => {
                     </div>
                     <div className="flex flex-wrap w-full space-y-4">
                       <div className="w-full flex flex-row max-sm:flex-col max-sm:space-x-0 max-sm:space-y-4 space-x-4 justify-between">
-                        <button className="bg-tranparent border rounded-sm w-full font-bold py-2 px-4">
-                          Add to Colection
+                        <button
+                          title="add to collection"
+                          type="submit"
+                          onClick={() => {
+                            handleAddToCollections(bookId as string);
+                          }}
+                          className="bg-tranparent border rounded-sm w-full font-bold py-2 px-4"
+                        >
+                          {bookInCollection[bookId as string] ? (
+                            <span className="text-blue-400">
+                              Already in Colection
+                            </span>
+                          ) : (
+                            <span>Add to Colection</span>
+                          )}
                         </button>
-                        <button className="bg-transparent border rounded-sm w-full font-bold py-2 px-4">
+                        <button
+                          title="read book"
+                          type="button"
+                          onClick={() => {
+                            navigate(`/readbook/${bookId}`);
+                          }}
+                          className="bg-transparent border rounded-sm w-full font-bold py-2 px-4"
+                        >
                           Read
                         </button>
                       </div>
-                      <button className="bg-transparent border w-full rounded-sm font-bold py-2 px-4">
+                      <button
+                        title="checkout"
+                        type="button"
+                        onClick={() => {
+                          handleAddToCollections(bookId as string);
+                          navigate(`/buybook/${bookId}`);
+                        }}
+                        className="bg-transparent border w-full rounded-sm font-bold py-2 px-4"
+                      >
                         Checkout
                       </button>
                     </div>
@@ -223,6 +359,38 @@ const BookCardScreen: React.FC = () => {
               </div>
             </div>
           </div>
+          {deleteBookFromCollectionConfirmatonModal && (
+            <div className="fixed inset-0 top-[40%] rounded-lg bg-white/70 border-green-300 text-red-600 border-2 shadow-sm shadow-green-300 h-40 p-4 flex justify-around items-center flex-col w-[80%] ml-[38px] lg:ml-96 lg:w-[50%] backdrop-blur-sm z-30">
+              <div
+                onClick={() => {
+                  setDeleteBookFromCollectionConfirmatonModal(false);
+                }}
+              >
+                <RxCross2 className="text-red-500 text-xl top-2 fixed right-4 hover:text-green-300 hover:border-2 hover:border-red-400 hover:rounded-full" />
+              </div>
+              {book ? (
+                <div className="text-center text-md font-semibold">
+                  The <span className="text-green-600">{book?.name}</span> is
+                  already in collection do wish to remove it?
+                </div>
+              ) : (
+                <div className="text-center text-md font-semibold">
+                  This book is already in collection do wish to remove it?
+                </div>
+              )}
+              <button
+                title="delete-book-from-collection"
+                type="button"
+                className="h-6 bg-red-400 border-red-500 text-green-300 p-4 flex justify-center items-center text-center rounded-lg mt-4 border-2"
+                onClick={() => {
+                  handleBookDeletionFormCollections(bookId as string);
+                  setDeleteBookFromCollectionConfirmatonModal(false);
+                }}
+              >
+                Yeah!! Delete it
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>

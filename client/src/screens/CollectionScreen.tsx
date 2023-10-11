@@ -339,7 +339,7 @@ const CollectionScreen = () => {
               </div>
             )}
             {deleteBookFromCollectionConfirmatonModal && (
-              <div className="fixed inset-0 top-1/2 rounded-lg bg-white/70 border-green-300 text-red-600 border-2 shadow-sm shadow-green-300 h-40 p-4 flex justify-around items-center flex-col w-[80%] ml-[38px] lg:ml-96 lg:w-[50%] backdrop-blur-sm z-30">
+              <div className="fixed inset-0 top-[40%] rounded-lg bg-white/70 border-green-300 text-red-600 border-2 shadow-sm shadow-green-300 h-40 p-4 flex justify-around items-center flex-col w-[80%] ml-[38px] lg:ml-96 lg:w-[50%] backdrop-blur-sm z-30">
                 <div
                   onClick={() => {
                     setDeleteBookFromCollectionConfirmatonModal(false);

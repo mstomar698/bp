@@ -11,6 +11,7 @@ import ProfileScreen from './screens/profileScreen';
 import AddBookScreen from './screens/AddBookScreen';
 import BookCardScreen from './screens/BookCardScreen';
 import ReadBook from './screens/ReadBook';
+import OverViewScreen from './screens/OverViewScreen';
 import CheckOut from './screens/CheckOut';
 import CollectionScreen from './screens/CollectionScreen';
 
@@ -64,6 +65,14 @@ const AllRoutes = () => {
         element={
           <ProtectedRoute>
             <ReadBook />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/overview/:id"
+        element={
+          <ProtectedRoute>
+            <OverViewScreen />
           </ProtectedRoute>
         }
       />
