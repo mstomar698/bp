@@ -1,14 +1,13 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useReducer } from 'react';
+import { useParams } from 'react-router-dom';
 import { getError } from '../utils';
 import { Store } from '../store';
-import {
-  BsFillArrowLeftSquareFill,
-  BsFillArrowRightSquareFill,
-  BsFillPlayCircleFill,
-} from 'react-icons/bs';
+// import {
+//   BsFillArrowLeftSquareFill,
+//   BsFillArrowRightSquareFill,
+//   BsFillPlayCircleFill,
+// } from 'react-icons/bs';
 import { FcReading, FcReadingEbook } from 'react-icons/fc';
 
 type Book = {

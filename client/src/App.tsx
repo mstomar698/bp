@@ -9,7 +9,7 @@ function App() {
     <div className="bg-black min-h-screen max-w-full overflow-hidden">
       <BrowserRouter>
         <Navbar />
-        <div className="min-h-screen">
+        <div className="min-h-screen mt-20">
           <AllRoutes />
           <ToastContainer position="bottom-center" limit={1} />
           <Footer />

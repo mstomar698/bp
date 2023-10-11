@@ -197,7 +197,8 @@ const HomeScreen = () => {
       });
       setBookInCollection(booksInCollection);
     }
-  }, [userInfo, collections, fetchCollectionsOnAdd]);
+    setItemsPerPage(itemsPerPage);
+  }, [userInfo, collections, fetchCollectionsOnAdd, itemsPerPage]);
   return (
     <div className="text-green-300 min-h-screen flex flex-grow flex-col justify-start items-start">
       <div className="w-full my-2 mb-4 items-center justify-center flex flex-grow">
@@ -302,14 +303,18 @@ const HomeScreen = () => {
       )}
       {deleteBookFromCollectionConfirmatonModal && (
         <div className="fixed inset-0 top-1/2 rounded-lg bg-white/70 border-green-300 text-red-600 border-2 shadow-sm shadow-green-300 h-40 p-4 flex justify-around items-center flex-col w-[80%] ml-[38px] lg:ml-96 lg:w-[50%] backdrop-blur-sm z-30">
-          <div onClick={() => {setDeleteBookFromCollectionConfirmatonModal(false)}}>
-          <RxCross2 className="text-red-500 text-xl top-2 fixed right-4 hover:text-green-300 hover:border-2 hover:border-red-400 hover:rounded-full" />
-        </div>
+          <div
+            onClick={() => {
+              setDeleteBookFromCollectionConfirmatonModal(false);
+            }}
+          >
+            <RxCross2 className="text-red-500 text-xl top-2 fixed right-4 hover:text-green-300 hover:border-2 hover:border-red-400 hover:rounded-full" />
+          </div>
           {bookTODeleteFromCollection ? (
             <div className="text-center text-md font-semibold">
               The{' '}
               <span className="text-green-600">
-                {bookTODeleteFromCollection.name}
+                {bookTODeleteFromCollection?.name}
               </span>{' '}
               is already in collection do wish to remove it?
             </div>
@@ -323,7 +328,7 @@ const HomeScreen = () => {
             type="button"
             className="h-6 bg-red-400 border-red-500 text-green-300 p-4 flex justify-center items-center text-center rounded-lg mt-4 border-2"
             onClick={() => {
-              handleBookDeletionFormCollections(bookTODeleteFromCollection._id);
+              handleBookDeletionFormCollections(bookTODeleteFromCollection?._id);
               setDeleteBookFromCollectionConfirmatonModal(false);
             }}
           >

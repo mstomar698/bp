@@ -76,8 +76,13 @@ const ProfileScreen = () => {
   };
 
   return (
-    <div className="h-screen p-4 md:p-16 bg-black text-green-300">
-      <Link to={'/'} className='flex flex-row justify-center items-center text-3xl mb-2'>BookPedia</Link>
+    <div className="h-screen p-4 md:p-16 text-green-300">
+      <Link
+        to={'/'}
+        className="flex flex-row justify-center items-center text-3xl mb-2"
+      >
+        BookPedia
+      </Link>
       <div className="mx-auto max-w-md border shadow-2xl p-8 rounded-lg">
         <h1 className="my-3 text-3xl font-bold text-center">User Profile</h1>
         <form onSubmit={submitHandler} className="space-y-3">
@@ -138,7 +143,10 @@ const ProfileScreen = () => {
           </div>
         </form>
         <h1 className="my-2 tetx-3xl font-bold  text-center">Add Books</h1>
-        <Link to="/addBook" className="p-3 border border-green-300 rounded flex flex-col justify-center items-center ">
+        <Link
+          to="/addBook"
+          className="p-3 border border-green-300 rounded flex flex-col justify-center items-center "
+        >
           Add Book
         </Link>
       </div>

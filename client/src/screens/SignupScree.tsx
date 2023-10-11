@@ -41,18 +41,21 @@ const SignupScreen = () => {
     }
   };
 
-    useEffect(() => {
-      if (userInfo) {
-        navigate(redirect);
-      }
-    }, [navigate, redirect, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">
       <div className="min-w-[60%]  min-h-[70%] mx-auto p-6 md:p-12 border-2 hover:border-4 hover:border-gray-700 rounded shadow-xl">
-      <Link to={'/'} className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4">
+        <Link
+          to={'/'}
+          className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4"
+        >
           BookPedia
-       </Link>
+        </Link>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
@@ -131,7 +134,9 @@ const SignupScreen = () => {
           <div className="text-white text-center my-4">
             Already have an account?{' '}
             <Link to={`/signin?redirect=${redirect}`}>
-              <span className="text-green-500 underline font-semibold">Sign-In</span>
+              <span className="text-green-500 underline font-semibold">
+                Sign-In
+              </span>
             </Link>
           </div>
         </form>

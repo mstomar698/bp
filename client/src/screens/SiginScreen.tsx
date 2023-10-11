@@ -32,18 +32,21 @@ const SigninScreen = () => {
     }
   };
 
-    useEffect(() => {
-      if (userInfo) {
-        navigate(redirect);
-      }
-    }, [navigate, redirect, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <div className="h-screen p-6 md:p-32 flex justify-center items-center">
       <div className="min-w-[50%]  min-h-[70%] mx-auto px-auto border-2 border-green-300 hover:border-2 hover:border-green-500 rounded shadow-xl p-16 max-sm:p-4 space-y-2">
-      <Link to={'/'} className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4">
+        <Link
+          to={'/'}
+          className="text-center text-3xl underline text-green-500 flex lfex -row justify-center items-center mb-4"
+        >
           BookPedia
-       </Link>
+        </Link>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label

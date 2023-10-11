@@ -61,7 +61,10 @@ const AddBookScreen = () => {
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white/10 p-8 rounded-lg shadow-md w-full md:w-1/2 lg:w-1/3">
-        <Link to={'/'} className="text-center text-3xl underline text-white/50 flex lfex -row justify-center items-center mb-4">
+        <Link
+          to={'/'}
+          className="text-center text-3xl underline text-white/50 flex lfex -row justify-center items-center mb-4"
+        >
           BookPedia
         </Link>
         <h2 className="text-2xl text-green-500 mb-4">

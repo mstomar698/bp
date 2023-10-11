@@ -119,8 +119,13 @@ export default function UserListScreen(): JSX.Element {
   };
 
   return (
-    <div className="h-screen p-8 bg-black text-green-300">
-      <Link to={'/'} className='flex flex-row justify-center items-center text-3xl'>BookPedia</Link>
+    <div className="h-screen p-8 text-green-300">
+      <Link
+        to={'/'}
+        className="flex flex-row justify-center items-center text-3xl"
+      >
+        BookPedia
+      </Link>
       <div className="p-4 h-[550px] w-screen-min overflow-auto">
         <h1 className="text-2xl font-bold mb-4">Users</h1>
         {loadingDelete && <p className="text-center">Deleting...</p>}

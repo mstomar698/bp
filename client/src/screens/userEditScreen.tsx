@@ -106,8 +106,13 @@ const UserEditScreen: React.FC = () => {
   };
 
   return (
-    <div className="h-screen p-16 bg-black text-green-300">
-       <Link to={'/'} className='flex flex-row justify-center items-center text-3xl my-4'>BookPedia</Link>
+    <div className="h-screen p-16 text-green-300">
+      <Link
+        to={'/'}
+        className="flex flex-row justify-center items-center text-3xl my-4"
+      >
+        BookPedia
+      </Link>
       <div className="container mx-auto max-w-md border-2 shadow-2xl p-4 rounded-lg">
         <h1 className="text-2xl font-bold mb-4">Edit User {userId}</h1>
         {loading ? (
