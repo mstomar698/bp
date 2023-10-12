@@ -184,13 +184,13 @@ const CheckOut: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* img */}
                 <div
-                  className={`px-16 max-sm:px-2 py-8 max-sm:py-2 flex flex-col max-sm:flex-row gap-8 max-sm:gap-2 justify-start items-center`}
+                  className={`sm:px-16 px-4 sm:py-12 py-2 max-h-screen max-sm:h-full flex flex-col max-sm:flex-row gap-8 max-sm:gap-2 justify-start items-center `}
                 >
-                  <div className="max-h-[400px] max-sm:h-full max-sm:pt-8 overflow-hidden w-full justify-center max-sm:justify-start items-start flex">
+                  <div className="h-[400px] max-sm:max-h-[300px] overflow-hidden justify-center items-center max-sm:items-start max-sm:justify-start flex p-4 max-sm:p-1 ">
                     <img
                       src={book.coverImage}
                       alt="Product"
-                      className="rounded-lg overflow-hidden p-0.5 border border-gray-300"
+                      className="rounded-lg max-sm:rounded-sm overflow-hidden p-0.5 border border-gray-300 min-h-full"
                     />
                   </div>
                   <div className="w-full p-4 pt-2 rounded">
@@ -241,7 +241,7 @@ const CheckOut: React.FC = () => {
 
                 {/* conetnt */}
                 <div
-                  className={`sm:px-16 px-4 sm:py-12 py-2 max-h-screen max-sm:h-full overflow-hidden justify-start flex flex-wrap gap-8 `}
+                  className={`sm:px-16 px-4 sm:py-12 py-2 max-h-screen max-sm:h-full overflow-hidden justify-start flex flex-wrap gap-8`}
                 >
                   <div className="flex flex-grow flex-col justify-start items-start w-full  p-4 max-sm:p-0 space-y-4 max-h-full max-sm:h-full max-sm:overflow-x-hidden overflow-y-auto">
                     {/* Origin price */}
